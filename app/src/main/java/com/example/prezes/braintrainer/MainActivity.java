@@ -118,7 +118,7 @@ public class MainActivity extends AppCompatActivity {
 
     public void startMethod(){
 
-        countDownTimer = new CountDownTimer(30 * 100 + 100/*30100*/, 1000) {
+        countDownTimer = new CountDownTimer(30 * 1000 + 100/*30100*/, 1000) {
             @Override
             public void onTick(long millisUntilFinished) {
                 updateTimer((int) millisUntilFinished / 1000);
@@ -130,6 +130,10 @@ public class MainActivity extends AppCompatActivity {
                 timerView.setText("0:00");
                 resultTextView.setText("Your score: " + Integer.toString(score) + "/" + Integer.toString(numberOfQuestions));
 
+                button0.setVisibility(View.INVISIBLE);
+                button1.setVisibility(View.INVISIBLE);
+                button2.setVisibility(View.INVISIBLE);
+                button3.setVisibility(View.INVISIBLE);
             }
         }.start();
 
