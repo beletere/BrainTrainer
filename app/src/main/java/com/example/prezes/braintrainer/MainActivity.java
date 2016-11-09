@@ -7,11 +7,13 @@ import android.support.v7.widget.ActivityChooserView;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.Random;
 
+import static com.example.prezes.braintrainer.R.id.newGame;
 import static com.example.prezes.braintrainer.R.id.resultTextView;
 
 public class MainActivity extends AppCompatActivity {
@@ -20,11 +22,13 @@ public class MainActivity extends AppCompatActivity {
     TextView sumView;
     TextView pointsView;
     TextView resultTextView;
+    RelativeLayout GameRelativeLayout;
     Button startButton;
     Button button0;
     Button button1;
     Button button2;
     Button button3;
+    Button newGame;
     CountDownTimer countDownTimer;
     ArrayList<Integer> answers = new ArrayList<Integer>();
     int locationOfCorrectAnswer;
@@ -32,6 +36,19 @@ public class MainActivity extends AppCompatActivity {
     int numberOfQuestions = 0;
     Random random;
 
+    public void playAgain (View view){
+        score = 0;
+        numberOfQuestions = 0;
+
+        timerView.setText("30s");
+        pointsView.setText("0/0");
+        resultTextView.setText("");
+        newGame.setVisibility(View.INVISIBLE);
+
+        generateQuestion();
+
+        startMethod();
+    }
 
     public void generateQuestion (){
 
@@ -67,6 +84,7 @@ public class MainActivity extends AppCompatActivity {
         button3.setText(Integer.toString(answers.get(3)));
 
     }
+
     public void chooseAnswer(View view){
         if(view.getTag().toString().equals(Integer.toString(locationOfCorrectAnswer))){
             score++;
@@ -80,6 +98,7 @@ public class MainActivity extends AppCompatActivity {
         generateQuestion();
 
     }
+
     public void updateTimer (int secondsLeft) {
 
         int minutes = (int) secondsLeft / 60;  // casting has to round down to 0
@@ -96,11 +115,10 @@ public class MainActivity extends AppCompatActivity {
         }
         timerView.setText(Integer.toString(minutes) + ":" + secondString);
     }
+
     public void startMethod(){
 
-        startButton.setVisibility(View.INVISIBLE);
-
-        countDownTimer = new CountDownTimer(30 * 1000 + 100/*30100*/, 1000) {
+        countDownTimer = new CountDownTimer(30 * 100 + 100/*30100*/, 1000) {
             @Override
             public void onTick(long millisUntilFinished) {
                 updateTimer((int) millisUntilFinished / 1000);
@@ -108,12 +126,20 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onFinish() {
+                newGame.setVisibility(View.VISIBLE);
                 timerView.setText("0:00");
                 resultTextView.setText("Your score: " + Integer.toString(score) + "/" + Integer.toString(numberOfQuestions));
+
             }
         }.start();
 
 
+    }
+
+    public void startGame(View view){
+        startButton.setVisibility(View.INVISIBLE);
+        GameRelativeLayout.setVisibility(RelativeLayout.VISIBLE);
+        playAgain(findViewById(R.id.newGame));
     }
 
     @Override
@@ -126,13 +152,16 @@ public class MainActivity extends AppCompatActivity {
         pointsView  = (TextView) findViewById(R.id.pointsView);
         resultTextView = (TextView) findViewById(R.id.resultTextView);
         startButton = (Button) findViewById(R.id.startButton);
+        GameRelativeLayout = (RelativeLayout) findViewById(R.id.GamerelativeLayout);
+
+        newGame = (Button) findViewById(R.id.newGame);
         button0 = (Button) findViewById(R.id.button);
         button1 = (Button) findViewById(R.id.button1);
         button2 = (Button) findViewById(R.id.button2);
         button3 = (Button) findViewById(R.id.button3);
 
-        startMethod();
-        generateQuestion();
+
+
 
     }
 }
