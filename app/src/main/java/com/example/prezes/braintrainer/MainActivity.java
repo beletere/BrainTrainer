@@ -44,6 +44,13 @@ public class MainActivity extends AppCompatActivity {
         pointsView.setText("0/0");
         resultTextView.setText("");
         newGame.setVisibility(View.INVISIBLE);
+        button0.setVisibility(View.VISIBLE);
+        button1.setVisibility(View.VISIBLE);
+        button2.setVisibility(View.VISIBLE);
+        button3.setVisibility(View.VISIBLE);
+        sumView.setVisibility(View.VISIBLE);
+        timerView.setVisibility(View.VISIBLE);
+        pointsView.setVisibility(View.VISIBLE);
 
         generateQuestion();
 
@@ -86,6 +93,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void chooseAnswer(View view){
+
         if(view.getTag().toString().equals(Integer.toString(locationOfCorrectAnswer))){
             score++;
             resultTextView.setText("Correct");
@@ -118,7 +126,7 @@ public class MainActivity extends AppCompatActivity {
 
     public void startMethod(){
 
-        countDownTimer = new CountDownTimer(30 * 1000 + 100/*30100*/, 1000) {
+        countDownTimer = new CountDownTimer(30 * 100 + 100/*30100*/, 1000) {
             @Override
             public void onTick(long millisUntilFinished) {
                 updateTimer((int) millisUntilFinished / 1000);
@@ -134,6 +142,9 @@ public class MainActivity extends AppCompatActivity {
                 button1.setVisibility(View.INVISIBLE);
                 button2.setVisibility(View.INVISIBLE);
                 button3.setVisibility(View.INVISIBLE);
+                sumView.setVisibility(View.INVISIBLE);
+                timerView.setVisibility(View.INVISIBLE);
+                pointsView.setVisibility(View.INVISIBLE);
             }
         }.start();
 
@@ -141,9 +152,11 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void startGame(View view){
+
         startButton.setVisibility(View.INVISIBLE);
         GameRelativeLayout.setVisibility(RelativeLayout.VISIBLE);
         playAgain(findViewById(R.id.newGame));
+
     }
 
     @Override
@@ -163,9 +176,6 @@ public class MainActivity extends AppCompatActivity {
         button1 = (Button) findViewById(R.id.button1);
         button2 = (Button) findViewById(R.id.button2);
         button3 = (Button) findViewById(R.id.button3);
-
-
-
 
     }
 }
