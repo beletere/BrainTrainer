@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.RelativeLayout;
+import android.widget.TableLayout;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -18,13 +19,15 @@ public class MainActivity extends AppCompatActivity {
     TextView pointsView;
     TextView resultTextView;
     RelativeLayout GameRelativeLayout;
+    //TableLayout tableLayout;
     Button startButtonAdd;
     Button startButtonDivision;
     Button button0;
     Button button1;
     Button button2;
     Button button3;
-    Button newGame;
+    Button newAddGame;
+    Button newMultiplyGame;
     CountDownTimer countDownTimer;
     ArrayList<Integer> answers = new ArrayList<Integer>();
     int locationOfCorrectAnswer;
@@ -40,12 +43,17 @@ public class MainActivity extends AppCompatActivity {
         timerView.setText("30s");
         pointsView.setText("0/0");
         resultTextView.setText("");
-        newGame.setVisibility(View.INVISIBLE);
+        newAddGame.setVisibility(View.INVISIBLE);
+        newMultiplyGame.setVisibility(View.INVISIBLE);
 
         button0.setVisibility(View.VISIBLE);
         button1.setVisibility(View.VISIBLE);
         button2.setVisibility(View.VISIBLE);
         button3.setVisibility(View.VISIBLE);
+
+        timerView.setVisibility(View.VISIBLE);
+        sumView.setVisibility(View.VISIBLE);
+        pointsView.setVisibility(View.VISIBLE);
 
         generateAddQuestion();
 
@@ -121,7 +129,7 @@ public class MainActivity extends AppCompatActivity {
 
     public void startMethod(){
 
-        countDownTimer = new CountDownTimer(30 * 100 + 100/*30100*/, 1000) {
+        countDownTimer = new CountDownTimer(30 * 1000 + 100/*30100*/, 1000) {
             @Override
             public void onTick(long millisUntilFinished) {
                 updateTimer((int) millisUntilFinished / 1000);
@@ -129,9 +137,16 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onFinish() {
-                newGame.setVisibility(View.VISIBLE);
+
+                //tableLayout.setVisibility(View.VISIBLE);
+                newAddGame.setVisibility(View.VISIBLE);
+                newMultiplyGame.setVisibility(View.VISIBLE);
                 timerView.setText("0:00");
                 resultTextView.setText("Your score: " + Integer.toString(score) + "/" + Integer.toString(numberOfQuestions));
+
+                timerView.setVisibility(View.INVISIBLE);
+                sumView.setVisibility(View.INVISIBLE);
+                pointsView.setVisibility(View.INVISIBLE);
 
                 button0.setVisibility(View.INVISIBLE);
                 button1.setVisibility(View.INVISIBLE);
@@ -148,7 +163,7 @@ public class MainActivity extends AppCompatActivity {
         startButtonAdd.setVisibility(View.INVISIBLE);
         startButtonDivision.setVisibility(View.INVISIBLE);
         GameRelativeLayout.setVisibility(RelativeLayout.VISIBLE);
-        playAddAgain(findViewById(R.id.newGame));
+        playAddAgain(findViewById(R.id.newAddGame));
     }
 
     @Override
@@ -163,8 +178,10 @@ public class MainActivity extends AppCompatActivity {
         startButtonAdd = (Button) findViewById(R.id.startButtonAdd);
         startButtonDivision = (Button) findViewById(R.id.startButtonDivision);
         GameRelativeLayout = (RelativeLayout) findViewById(R.id.GamerelativeLayout);
+       // tableLayout = (TableLayout) findViewById(R.id.tableLayout);
 
-        newGame = (Button) findViewById(R.id.newGame);
+        newAddGame = (Button) findViewById(R.id.newAddGame);
+        newMultiplyGame = (Button) findViewById(R.id.newMultiplyGame);
         button0 = (Button) findViewById(R.id.button);
         button1 = (Button) findViewById(R.id.button1);
         button2 = (Button) findViewById(R.id.button2);

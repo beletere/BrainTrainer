@@ -22,6 +22,71 @@
             android:visibility="invisible"
             android:id="@+id/GamerelativeLayout">
 
+            <TableLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/tableLayout">
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:padding="35dp"
+                    android:alpha="0">
+
+                    <Button
+                        android:text="Button"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/button6" />
+                </TableRow>
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" >
+
+                    <Button
+                        android:text="~ Add again ~"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:id="@+id/newAddGame"
+                        android:onClick="playAddAgain"
+                        android:padding="35dp"
+                        android:textSize="30sp"
+                        android:background="?android:attr/textColorLink"
+                        android:layout_centerHorizontal="true"
+                        android:layout_centerVertical="true"
+                        android:visibility="invisible" />
+                </TableRow>
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" >
+
+                    <Button
+                        android:text="Multiply again!"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:id="@+id/newMultiplyGame"
+                        android:padding="35dp"
+                        android:background="#d8fd0b"
+                        android:textSize="30sp"
+                        android:layout_below="@+id/newAddGame"
+                        android:layout_alignEnd="@+id/newAddGame"
+                        android:layout_alignStart="@+id/newAddGame"
+                        android:layout_centerInParent="false"
+                        android:layout_centerVertical="false"
+                        android:layout_alignWithParentIfMissing="false"
+                        android:visibility="invisible"
+                        android:onClick="playAddAgain" />
+                </TableRow>
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" />
+            </TableLayout>
+
             <TextView
                 android:text="30 + 12"
                 android:layout_width="wrap_content"
@@ -44,20 +109,6 @@
                 android:layout_alignParentTop="true"
                 android:layout_alignParentEnd="true"
                 android:layout_marginEnd="14dp" />
-
-            <Button
-                android:text="~ Add again ~"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/newGame"
-                android:layout_centerHorizontal="false"
-                android:layout_centerVertical="false"
-                android:layout_centerInParent="true"
-                android:onClick="playAddAgain"
-                android:visibility="invisible"
-                android:padding="35dp"
-                android:textSize="30sp"
-                android:background="?android:attr/textColorLink" />
 
             <GridLayout
                 android:layout_width="match_parent"
@@ -157,52 +208,45 @@
 
     </RelativeLayout>
 
-    <LinearLayout
-        android:orientation="vertical"
+    <GridLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_alignParentBottom="false"
-        android:layout_alignParentEnd="false"
-        android:layout_alignParentLeft="false"
-        android:layout_alignParentRight="false">
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:layout_marginTop="150dp"
+        android:layout_alignParentStart="false"
+        android:layout_centerInParent="false"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true">
 
         <Button
             android:text="Add!"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
             android:id="@+id/startButtonAdd"
             android:onClick="startGame"
             android:background="@android:color/holo_green_light"
             android:textSize="35sp"
-            android:padding="35dp"
-            android:layout_centerHorizontal="true"
             android:visibility="visible"
-            android:layout_centerInParent="false"
-            android:layout_centerVertical="false" />
+            android:layout_weight="1"
+            android:layout_row="0"
+            android:layout_column="0"
+            android:layout_height="match_parent"
+            android:padding="40dp" />
 
         <Button
             android:text="Multiply!"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_weight="1"
             android:id="@+id/startButtonDivision"
-            android:layout_centerVertical="false"
-            android:layout_centerInParent="false"
-            android:layout_centerHorizontal="false"
             android:onClick="startGame"
             android:visibility="visible"
             android:textSize="35sp"
-            android:padding="35dp"
-            android:background="@android:color/holo_orange_light" />
+            android:background="@android:color/holo_orange_light"
 
-    </LinearLayout>
+            android:layout_row="1"
+            android:layout_column="0"
+            android:layout_height="match_parent"
+            android:padding="40dp" />
 
-    <FrameLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_centerInParent="false"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentStart="true">
-
-    </FrameLayout>
+    </GridLayout>
 
 </RelativeLayout>
