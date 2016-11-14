@@ -3,8 +3,6 @@ package com.example.prezes.braintrainer;
 import android.os.CountDownTimer;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.ActivityChooserView;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.RelativeLayout;
@@ -13,9 +11,6 @@ import android.widget.TextView;
 import java.util.ArrayList;
 import java.util.Random;
 
-import static com.example.prezes.braintrainer.R.id.newGame;
-import static com.example.prezes.braintrainer.R.id.resultTextView;
-
 public class MainActivity extends AppCompatActivity {
 
     TextView timerView;
@@ -23,7 +18,8 @@ public class MainActivity extends AppCompatActivity {
     TextView pointsView;
     TextView resultTextView;
     RelativeLayout GameRelativeLayout;
-    Button startButton;
+    Button startButtonAdd;
+    Button startButtonDivision;
     Button button0;
     Button button1;
     Button button2;
@@ -36,7 +32,8 @@ public class MainActivity extends AppCompatActivity {
     int numberOfQuestions = 0;
     Random random;
 
-    public void playAgain (View view){
+    public void playAddAgain(View view){
+
         score = 0;
         numberOfQuestions = 0;
 
@@ -44,20 +41,18 @@ public class MainActivity extends AppCompatActivity {
         pointsView.setText("0/0");
         resultTextView.setText("");
         newGame.setVisibility(View.INVISIBLE);
+
         button0.setVisibility(View.VISIBLE);
         button1.setVisibility(View.VISIBLE);
         button2.setVisibility(View.VISIBLE);
         button3.setVisibility(View.VISIBLE);
-        sumView.setVisibility(View.VISIBLE);
-        timerView.setVisibility(View.VISIBLE);
-        pointsView.setVisibility(View.VISIBLE);
 
-        generateQuestion();
+        generateAddQuestion();
 
         startMethod();
     }
 
-    public void generateQuestion (){
+    public void generateAddQuestion(){
 
         random = new Random();
         int a = random.nextInt(21); //20
@@ -103,7 +98,7 @@ public class MainActivity extends AppCompatActivity {
 
         numberOfQuestions++;
         pointsView.setText(Integer.toString(score) + "/" + Integer.toString(numberOfQuestions));
-        generateQuestion();
+        generateAddQuestion();
 
     }
 
@@ -142,9 +137,6 @@ public class MainActivity extends AppCompatActivity {
                 button1.setVisibility(View.INVISIBLE);
                 button2.setVisibility(View.INVISIBLE);
                 button3.setVisibility(View.INVISIBLE);
-                sumView.setVisibility(View.INVISIBLE);
-                timerView.setVisibility(View.INVISIBLE);
-                pointsView.setVisibility(View.INVISIBLE);
             }
         }.start();
 
@@ -153,10 +145,10 @@ public class MainActivity extends AppCompatActivity {
 
     public void startGame(View view){
 
-        startButton.setVisibility(View.INVISIBLE);
+        startButtonAdd.setVisibility(View.INVISIBLE);
+        startButtonDivision.setVisibility(View.INVISIBLE);
         GameRelativeLayout.setVisibility(RelativeLayout.VISIBLE);
-        playAgain(findViewById(R.id.newGame));
-
+        playAddAgain(findViewById(R.id.newGame));
     }
 
     @Override
@@ -168,7 +160,8 @@ public class MainActivity extends AppCompatActivity {
         sumView  = (TextView) findViewById(R.id.sumView);
         pointsView  = (TextView) findViewById(R.id.pointsView);
         resultTextView = (TextView) findViewById(R.id.resultTextView);
-        startButton = (Button) findViewById(R.id.startButton);
+        startButtonAdd = (Button) findViewById(R.id.startButtonAdd);
+        startButtonDivision = (Button) findViewById(R.id.startButtonDivision);
         GameRelativeLayout = (RelativeLayout) findViewById(R.id.GamerelativeLayout);
 
         newGame = (Button) findViewById(R.id.newGame);
@@ -176,6 +169,9 @@ public class MainActivity extends AppCompatActivity {
         button1 = (Button) findViewById(R.id.button1);
         button2 = (Button) findViewById(R.id.button2);
         button3 = (Button) findViewById(R.id.button3);
+
+
+
 
     }
 }

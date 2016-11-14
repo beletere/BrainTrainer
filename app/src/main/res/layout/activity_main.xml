@@ -13,8 +13,6 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_centerVertical="true"
-        android:layout_centerHorizontal="true"
         android:background="@drawable/background">
 
 
@@ -48,14 +46,14 @@
                 android:layout_marginEnd="14dp" />
 
             <Button
-                android:text="New Game"
+                android:text="~ Add again ~"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/newGame"
                 android:layout_centerHorizontal="false"
                 android:layout_centerVertical="false"
                 android:layout_centerInParent="true"
-                android:onClick="playAgain"
+                android:onClick="playAddAgain"
                 android:visibility="invisible"
                 android:padding="35dp"
                 android:textSize="30sp"
@@ -159,17 +157,52 @@
 
     </RelativeLayout>
 
-    <Button
-        android:text="START!"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/startButton"
-        android:onClick="startGame"
-        android:background="@android:color/holo_green_light"
-        android:textSize="35sp"
-        android:padding="35dp"
-        android:layout_centerVertical="true"
-        android:layout_centerHorizontal="true"
-        android:visibility="visible" />
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentBottom="false"
+        android:layout_alignParentEnd="false"
+        android:layout_alignParentLeft="false"
+        android:layout_alignParentRight="false">
+
+        <Button
+            android:text="Add!"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/startButtonAdd"
+            android:onClick="startGame"
+            android:background="@android:color/holo_green_light"
+            android:textSize="35sp"
+            android:padding="35dp"
+            android:layout_centerHorizontal="true"
+            android:visibility="visible"
+            android:layout_centerInParent="false"
+            android:layout_centerVertical="false" />
+
+        <Button
+            android:text="Multiply!"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/startButtonDivision"
+            android:layout_centerVertical="false"
+            android:layout_centerInParent="false"
+            android:layout_centerHorizontal="false"
+            android:onClick="startGame"
+            android:visibility="visible"
+            android:textSize="35sp"
+            android:padding="35dp"
+            android:background="@android:color/holo_orange_light" />
+
+    </LinearLayout>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_centerInParent="false"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true">
+
+    </FrameLayout>
 
 </RelativeLayout>
