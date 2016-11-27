@@ -6,7 +6,6 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.RelativeLayout;
-import android.widget.TableLayout;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -19,15 +18,18 @@ public class MainActivity extends AppCompatActivity {
     TextView pointsView;
     TextView resultTextView;
     RelativeLayout GameRelativeLayout;
-    //TableLayout tableLayout;
     Button startButtonAdd;
-    Button startButtonDivision;
+    Button startButtonMultiplication;
     Button button0;
     Button button1;
     Button button2;
     Button button3;
-    Button newAddGame;
-    Button newMultiplyGame;
+    Button button4;
+    Button button5;
+    Button button6;
+    Button button7;
+    Button newAddGameButton;
+    Button newMultiplicationGameButton;
     CountDownTimer countDownTimer;
     ArrayList<Integer> answers = new ArrayList<Integer>();
     int locationOfCorrectAnswer;
@@ -43,8 +45,8 @@ public class MainActivity extends AppCompatActivity {
         timerView.setText("30s");
         pointsView.setText("0/0");
         resultTextView.setText("");
-        newAddGame.setVisibility(View.INVISIBLE);
-        newMultiplyGame.setVisibility(View.INVISIBLE);
+        newAddGameButton.setVisibility(View.INVISIBLE);
+        newMultiplicationGameButton.setVisibility(View.INVISIBLE);
 
         button0.setVisibility(View.VISIBLE);
         button1.setVisibility(View.VISIBLE);
@@ -79,7 +81,7 @@ public class MainActivity extends AppCompatActivity {
                 answers.add(a + b); //adding correct answer in random button
             } else {
 
-                incorrectAnswer = random.nextInt(41); // 41 because it is a total of both a&b(20 for each)
+                incorrectAnswer = random.nextInt(41); // 41 because it is a total of both a&b(20 for each) -1
 
                 while (incorrectAnswer == a + b) { // while created because can be equal to the user answer
                     incorrectAnswer = random.nextInt(41);
@@ -95,9 +97,86 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    public void chooseAnswer(View view){
+    public void playMultiplicationAgain(View view){
 
-        if(view.getTag().toString().equals(Integer.toString(locationOfCorrectAnswer))){
+        score = 0;
+        numberOfQuestions = 0;
+
+        timerView.setText("30s");
+        pointsView.setText("0/0");
+        resultTextView.setText("");
+        newAddGameButton.setVisibility(View.INVISIBLE);
+        newMultiplicationGameButton.setVisibility(View.INVISIBLE);
+
+        button4.setVisibility(View.VISIBLE);
+        button5.setVisibility(View.VISIBLE);
+        button6.setVisibility(View.VISIBLE);
+        button7.setVisibility(View.VISIBLE);
+
+        timerView.setVisibility(View.VISIBLE);
+        sumView.setVisibility(View.VISIBLE);
+        pointsView.setVisibility(View.VISIBLE);
+
+        generateMultiplicationQuestion();
+
+        startMethod();
+    }
+
+    public void generateMultiplicationQuestion(){
+
+        random = new Random();
+        int a = random.nextInt(11);
+        int b = random.nextInt(11);
+
+        locationOfCorrectAnswer = random.nextInt(4);
+
+        answers.clear(); // has to be cleared every run of generateQuestion(); otherwise button view won't update
+
+        int incorrectAnswer;
+
+        sumView.setText(Integer.toString(a) + " * " + Integer.toString(b));
+
+        for (int i = 0; i < 4; i++){
+            if (i == locationOfCorrectAnswer) {
+                answers.add(a * b); //adding correct answer in random button
+            } else {
+
+                incorrectAnswer = random.nextInt(100);
+
+                while (incorrectAnswer == a * b) { // while created because can be equal to the user answer
+                    incorrectAnswer = random.nextInt(100);
+                }
+                answers.add(incorrectAnswer); // sum of total // potential issue: this result can be equal to the answer
+            }
+        }
+
+        button4.setText(Integer.toString(answers.get(0)));
+        button5.setText(Integer.toString(answers.get(1)));
+        button6.setText(Integer.toString(answers.get(2)));
+        button7.setText(Integer.toString(answers.get(3)));
+
+    }
+
+    public void chooseAnswerAdd(View view){
+
+
+                if (view.getTag().toString().equals(Integer.toString(locationOfCorrectAnswer))) {
+                    score++;
+                    resultTextView.setText("Correct");
+                } else {
+                    resultTextView.setText("Wrong");
+                }
+
+                numberOfQuestions++;
+                pointsView.setText(Integer.toString(score) + "/" + Integer.toString(numberOfQuestions));
+
+            generateAddQuestion();
+    }
+
+    public void chooseAnswerMultiply(View view){
+
+
+        if (view.getTag().toString().equals(Integer.toString(locationOfCorrectAnswer))) {
             score++;
             resultTextView.setText("Correct");
         } else {
@@ -106,8 +185,8 @@ public class MainActivity extends AppCompatActivity {
 
         numberOfQuestions++;
         pointsView.setText(Integer.toString(score) + "/" + Integer.toString(numberOfQuestions));
-        generateAddQuestion();
 
+        generateMultiplicationQuestion();
     }
 
     public void updateTimer (int secondsLeft) {
@@ -139,8 +218,8 @@ public class MainActivity extends AppCompatActivity {
             public void onFinish() {
 
                 //tableLayout.setVisibility(View.VISIBLE);
-                newAddGame.setVisibility(View.VISIBLE);
-                newMultiplyGame.setVisibility(View.VISIBLE);
+                newAddGameButton.setVisibility(View.VISIBLE);
+                newMultiplicationGameButton.setVisibility(View.VISIBLE);
                 timerView.setText("0:00");
                 resultTextView.setText("Your score: " + Integer.toString(score) + "/" + Integer.toString(numberOfQuestions));
 
@@ -152,18 +231,48 @@ public class MainActivity extends AppCompatActivity {
                 button1.setVisibility(View.INVISIBLE);
                 button2.setVisibility(View.INVISIBLE);
                 button3.setVisibility(View.INVISIBLE);
+                button4.setVisibility(View.INVISIBLE);
+                button5.setVisibility(View.INVISIBLE);
+                button6.setVisibility(View.INVISIBLE);
+                button7.setVisibility(View.INVISIBLE);
             }
         }.start();
 
 
     }
 
-    public void startGame(View view){
+    public void startAdd(View view){
 
         startButtonAdd.setVisibility(View.INVISIBLE);
-        startButtonDivision.setVisibility(View.INVISIBLE);
+        startButtonMultiplication.setVisibility(View.INVISIBLE);
         GameRelativeLayout.setVisibility(RelativeLayout.VISIBLE);
         playAddAgain(findViewById(R.id.newAddGame));
+
+        button0.setVisibility(View.VISIBLE);
+        button1.setVisibility(View.VISIBLE);
+        button2.setVisibility(View.VISIBLE);
+        button3.setVisibility(View.VISIBLE);
+        button4.setVisibility(View.INVISIBLE);
+        button5.setVisibility(View.INVISIBLE);
+        button6.setVisibility(View.INVISIBLE);
+        button7.setVisibility(View.INVISIBLE);
+    }
+
+    public void startMultiplication(View view){
+
+        startButtonAdd.setVisibility(View.INVISIBLE);
+        startButtonMultiplication.setVisibility(View.INVISIBLE);
+        GameRelativeLayout.setVisibility(RelativeLayout.VISIBLE);
+        playMultiplicationAgain(findViewById(R.id.newMultiplicationGame));
+
+        button0.setVisibility(View.INVISIBLE);
+        button1.setVisibility(View.INVISIBLE);
+        button2.setVisibility(View.INVISIBLE);
+        button3.setVisibility(View.INVISIBLE);
+        button4.setVisibility(View.VISIBLE);
+        button5.setVisibility(View.VISIBLE);
+        button6.setVisibility(View.VISIBLE);
+        button7.setVisibility(View.VISIBLE);
     }
 
     @Override
@@ -176,19 +285,19 @@ public class MainActivity extends AppCompatActivity {
         pointsView  = (TextView) findViewById(R.id.pointsView);
         resultTextView = (TextView) findViewById(R.id.resultTextView);
         startButtonAdd = (Button) findViewById(R.id.startButtonAdd);
-        startButtonDivision = (Button) findViewById(R.id.startButtonDivision);
+        startButtonMultiplication = (Button) findViewById(R.id.startButtonMultiplication);
         GameRelativeLayout = (RelativeLayout) findViewById(R.id.GamerelativeLayout);
-       // tableLayout = (TableLayout) findViewById(R.id.tableLayout);
 
-        newAddGame = (Button) findViewById(R.id.newAddGame);
-        newMultiplyGame = (Button) findViewById(R.id.newMultiplyGame);
+        newAddGameButton = (Button) findViewById(R.id.newAddGame);
+        newMultiplicationGameButton = (Button) findViewById(R.id.newMultiplicationGame);
         button0 = (Button) findViewById(R.id.button);
         button1 = (Button) findViewById(R.id.button1);
         button2 = (Button) findViewById(R.id.button2);
         button3 = (Button) findViewById(R.id.button3);
-
-
-
+        button4 = (Button) findViewById(R.id.button4);
+        button5 = (Button) findViewById(R.id.button5);
+        button6 = (Button) findViewById(R.id.button6);
+        button7 = (Button) findViewById(R.id.button7);
 
     }
 }
